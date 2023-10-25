@@ -1,0 +1,81 @@
+/* Tablo stilleri */
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #dddddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* İlgili başlık stilleri */
+h1 {
+    font-size: 20px;
+    background-color: #ffffff;
+    color: black;
+    padding: 10px;
+}
+/* Tablo stilleri */
+.toggleable-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.toggleable-table th, .toggleable-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+/* Sınıf stilleri */
+.toggle-button {
+    cursor: pointer;
+}
+
+.toggle-button-5 {
+    cursor: pointer;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Butonların stil tanımlamaları */
+.toggle-button {
+    width: 25px;
+    height: 25px;
+    border: none;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.toggle-button:hover {
+    background-color: #cccccc; /* Fare üzerine gelince renk değişimi */
+}
+
+/* Butonların düzenlemeleri */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+.button-container:nth-child(odd) .square-button {
+    background-color: #dddddd; /* Gri arka plan rengi */
+}
+
+.button-container:nth-child(even) .square-button {
+    background-color: #ffffff; /* Beyaz arka plan rengi */
+}

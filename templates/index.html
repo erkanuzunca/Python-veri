@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Verileri</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    
+
+    <style>
+        .hidden-row-5 {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>1. Çıktı</h1>
+    <table class="toggleable-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Hesap Kodu</th>
+                <th>Borç</th>
+            </tr>
+        </thead>
+      
+        <tbody>
+            {% for key, value in data["with_3_digits"].items() %}
+             <tr  class="custom-row  hidden-row-8" data-key="{{ key }}">
+                    <td class="toggle-button" data-key="{{ key }}">+</td>
+                    <td>{{ key }}</td>
+                    <td>{{ "%.2f"|format(value) }}</td>   
+                </tr>
+                {% for sub_key, sub_value in data["with_5_digits"].items() %}
+                    {% if sub_key.startswith(key) %}
+                        <tr class="hidden-row hidden-row-5 hidden-row-8" data-key="{{ key }}">
+                            <td class="toggle-button-5" data-key="{{ sub_key }}">+</td>
+                            <td>{{ sub_key }}</td>
+                            <td>{{ "%.2f"|format(sub_value) }}</td>
+                        </tr>
+                        {% for sub_sub_key, sub_sub_value in data["with_8_digits"].items() %}
+                            {% if sub_sub_key.startswith(sub_key) %}
+                                <tr class="hidden-row hidden-row-5 hidden-row-8" data-key="{{ sub_key }}">
+                                    <td></td>
+                                    <td>{{ sub_sub_key }}</td>
+                                    <td>{{ "%.2f"|format(sub_sub_value) }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // JavaScript kullanarak tabloyu açma işlemleri
+        const toggleButtons = document.querySelectorAll(".toggle-button");
+        const toggleButtons5 = document.querySelectorAll(".toggle-button-5");
+        const toggleButtons2 = document.querySelectorAll(".toggle-button-2");
+
+        toggleButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const key = button.getAttribute("data-key");
+                const hiddenRows = document.querySelectorAll(`.hidden-row[data-key="${key}"]`);
+
+                hiddenRows.forEach(hiddenRow => {
+                    if (hiddenRow.style.display === "table-row") {
+                        hiddenRow.style.display = "none";
+                        button.textContent = "+";
+                    } else {
+                        hiddenRow.style.display = "table-row";
+                        button.textContent = "-";
+                    }
+                });
+
+            });
+        });
+
+        toggleButtons5.forEach(button5 => {
+            button5.addEventListener("click", () => {
+                const key = button5.getAttribute("data-key");
+                const hiddenRows8 = document.querySelectorAll(`.hidden-row-8[data-key="${key}"]`);
+
+                hiddenRows8.forEach(hiddenRow8 => {
+                    if (hiddenRow8.style.display === "table-row") {
+                        hiddenRow8.style.display = "none";
+                        button5.textContent = "+";
+                    } else {
+                        hiddenRow8.style.display = "table-row";
+                        button5.textContent = "-";
+                    }
+                });
+            });
+        });
+        const rows = document.querySelectorAll('.custom-row');
+
+rows.forEach((row, index) => {
+    if (index % 2 === 0) {
+        row.style.backgroundColor = '#ffffff'; // Çift numaralı satırlar gri
+    } else {
+        row.style.backgroundColor = '#dddddd'; // Tek numaralı satırlar beyaz
+    }
+});
+
+
+    </script>
+   
+</body>
+</html>
